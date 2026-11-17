@@ -1,0 +1,1398 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATHISH — LEVEL 24 | The Gifts World</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+:root {
+  --gold:#d8b978;
+  --gold-light:#f3dfaa;
+  --cream:#f4e9d4;
+  --burgundy:#501b2b;
+  --dark:#090a12;
+  --navy:#10182b;
+}
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  margin:0;
+  min-height:100vh;
+  background:#090a12;
+  color:var(--cream);
+  font-family:'Cormorant Garamond',serif;
+  overflow-x:hidden;
+}
+
+button { font:inherit; cursor:pointer; }
+
+.hidden { display:none !important; }
+
+#stars {
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.45;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%,#fff,transparent),
+    radial-gradient(1px 1px at 70% 40%,#fff,transparent),
+    radial-gradient(2px 2px at 30% 80%,#e8d5a6,transparent),
+    radial-gradient(1px 1px at 90% 10%,#fff,transparent),
+    radial-gradient(1px 1px at 50% 55%,#fff,transparent);
+  background-size:230px 230px;
+  animation:starDrift 35s linear infinite;
+}
+
+@keyframes starDrift {
+  from { transform:translateY(0); }
+  to { transform:translateY(-230px); }
+}
+
+main, section, header, footer { position:relative; z-index:1; }
+
+.eyebrow {
+  font-family:'Cinzel',serif;
+  letter-spacing:5px;
+  font-size:10px;
+  color:var(--gold);
+  text-transform:uppercase;
+}
+
+.gold-line {
+  width:100px;
+  height:1px;
+  margin:20px auto;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+.primary-btn {
+  border:1px solid var(--gold);
+  color:var(--gold-light);
+  background:linear-gradient(135deg,#321521,#160d15);
+  padding:15px 27px;
+  font-family:'Cinzel',serif;
+  letter-spacing:2px;
+  font-size:11px;
+  transition:.35s;
+}
+
+.primary-btn:hover {
+  background:var(--gold);
+  color:#1b1010;
+  box-shadow:0 0 35px #d8b97855;
+  transform:translateY(-3px);
+}
+
+.back-btn {
+  background:transparent;
+  color:var(--gold);
+  border:1px solid #d8b97866;
+  padding:10px 18px;
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+/* INTRO */
+
+#intro {
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px 18px;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 70%,#59301f66,transparent 55%),
+    linear-gradient(#090a12,#10101a 70%,#090a12);
+}
+
+#intro h1 {
+  font-family:'Cinzel',serif;
+  font-size:clamp(28px,6vw,68px);
+  letter-spacing:5px;
+  font-weight:500;
+  margin:15px 0;
+  color:#f3e4c6;
+  text-shadow:0 0 35px #d8b97855;
+}
+
+.intro-subtitle {
+  letter-spacing:5px;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  color:var(--gold);
+}
+
+.door-stage {
+  --door-gap:clamp(16px,3.2vw,42px);
+  width:min(1040px,96vw);
+  height:clamp(330px,43vw,510px);
+  perspective:1800px;
+  margin:42px auto 28px;
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--door-gap);
+  filter:drop-shadow(0 18px 38px #000b);
+}
+
+.door-unit {
+  position:relative;
+  min-width:0;
+  height:100%;
+  padding:9px;
+  background:linear-gradient(135deg,#f0d79a,#76502a 18%,#21130f 30%,#21130f 70%,#76502a 82%,#f0d79a);
+  border:2px solid #d8b978;
+  outline:1px solid #8f693b;
+  outline-offset:4px;
+  box-shadow:0 0 35px #d8b97828,inset 0 0 25px #000;
+  overflow:visible;
+}
+
+.door-unit:before,
+.door-unit:after {
+  content:"";
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+  border:1px solid #e6c78388;
+}
+
+.door-unit:before { inset:13px; }
+.door-unit:after { inset:20px; border-color:#80603a99; }
+
+.door {
+  width:100%;
+  height:100%;
+  position:relative;
+  z-index:2;
+  transform-style:preserve-3d;
+  transition:transform 2s cubic-bezier(.2,.75,.15,1);
+  border:3px solid #d3ad68;
+  background:radial-gradient(ellipse at center,#552a27 0%,#32151b 55%,#160e13 100%);
+  box-shadow:inset 0 0 30px #000,inset 0 0 0 8px #6d4729;
+}
+
+.door.left { transform-origin:left center; }
+.door.right { transform-origin:right center; }
+
+.door-panel {
+  position:absolute;
+  inset:clamp(12px,2vw,22px);
+  border:2px solid #b58a4c;
+  outline:1px solid #6b492b;
+  outline-offset:-8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:14px;
+  background:linear-gradient(145deg,#4a2027,#1a1016 65%,#4a2922);
+}
+
+.door-panel:before,
+.door-panel:after {
+  content:"";
+  position:absolute;
+  border:1px solid #b88e4e;
+  inset:18px;
+  pointer-events:none;
+}
+
+.door-panel:after { inset:35px; border-color:#80603a; }
+
+.door-symbol {
+  font-size:clamp(35px,6vw,68px);
+  color:#e7c987;
+  text-shadow:0 0 20px #d8b97888;
+}
+
+.door-label {
+  font-family:'Cinzel',serif;
+  font-size:clamp(14px,2.4vw,25px);
+  letter-spacing:clamp(2px,.5vw,5px);
+  color:#f5dfb0;
+}
+
+.door-handle {
+  position:absolute;
+  top:50%;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#fff0b8,#9c6c2c 70%);
+  box-shadow:0 0 15px #e9c77c;
+}
+
+.left .door-handle { right:18px; }
+.right .door-handle { left:18px; }
+
+/* LOVE: moonlit ivory, rose-gold and celestial detailing */
+.love-unit {
+  box-shadow:0 0 42px #e8c98b33,inset 0 0 25px #000;
+}
+.love-unit .door {
+  border-color:#ead19a;
+  background:radial-gradient(ellipse at 50% 35%,#705044 0%,#35202a 58%,#17111b 100%);
+  box-shadow:inset 0 0 35px #000,inset 0 0 0 8px #8e6948;
+}
+.love-unit .door-panel {
+  border-color:#e1c38a;
+  background:
+    radial-gradient(ellipse at 50% 25%,#78505a 0%,transparent 52%),
+    linear-gradient(145deg,#54313b,#211622 65%,#4b2b34);
+}
+.love-unit .door-panel:before { border-color:#e3c68d; }
+.love-unit .door-panel:after { border-color:#bd9b6b; }
+.love-unit .door-symbol { color:#f2dca9;text-shadow:0 0 24px #f2dca988; }
+
+/* LUST: deep wine, obsidian and antique-gold detailing */
+.lust-unit {
+  background:linear-gradient(135deg,#f1d28d,#70431e 18%,#16090e 30%,#16090e 70%,#70431e 82%,#f1d28d);
+  box-shadow:0 0 42px #8d243c44,inset 0 0 25px #000;
+}
+.lust-unit .door {
+  border-color:#c79a55;
+  background:radial-gradient(ellipse at 50% 35%,#692033 0%,#2c0c19 58%,#0d080e 100%);
+  box-shadow:inset 0 0 35px #000,inset 0 0 0 8px #57301e;
+}
+.lust-unit .door-panel {
+  border-color:#c99b58;
+  background:
+    radial-gradient(ellipse at 50% 25%,#72243a 0%,transparent 52%),
+    linear-gradient(145deg,#511526,#160b12 65%,#35101d);
+}
+.lust-unit .door-panel:before { border-color:#d0a15c; }
+.lust-unit .door-panel:after { border-color:#80552f; }
+.lust-unit .door-symbol { color:#e9c47d;text-shadow:0 0 24px #d8a64c99; }
+
+.door.open-left { transform:rotateY(-112deg); }
+.door.open-right { transform:rotateY(112deg); }
+
+.door-choice {
+  position:absolute;
+  inset:0;
+  z-index:4;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--door-gap);
+}
+
+.door-choice button {
+  background:transparent;
+  border:0;
+  min-width:0;
+  cursor:pointer;
+}
+
+.door-choice button:focus-visible {
+  outline:2px solid #f3dfaa;
+  outline-offset:7px;
+}
+
+.door-hint {
+  color:#b9a88a;
+  letter-spacing:3px;
+  font-size:11px;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse { 50% { opacity:.4; } }
+
+
+/* COLLECTION */
+
+.collection {
+  min-height:100vh;
+  padding:35px 20px 80px;
+  display:none;
+}
+
+.collection.active { display:block; }
+
+.collection-love {
+  background:
+    radial-gradient(ellipse at top,#4a2435 0%,transparent 55%),
+    linear-gradient(#170f19,#0c0b12);
+}
+
+.collection-lust {
+  background:
+    radial-gradient(ellipse at top,#491522 0%,transparent 55%),
+    linear-gradient(#100b10,#08080d);
+}
+
+.collection-header {
+  max-width:1100px;
+  margin:25px auto 50px;
+  text-align:center;
+}
+
+.collection-header h2 {
+  font-family:'Cinzel',serif;
+  font-size:clamp(28px,6vw,55px);
+  letter-spacing:5px;
+  color:var(--gold-light);
+  font-weight:500;
+  margin:15px 0;
+}
+
+.collection-header p {
+  font-size:20px;
+  color:#c5b49b;
+}
+
+.gift-grid {
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px;
+}
+
+/* SEALED GIFT ENVELOPES */
+
+.gift-card {
+  position:relative;
+  min-height:255px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  perspective:900px;
+  transition:transform .4s;
+  padding:12px;
+}
+
+.gift-card:hover {
+  transform:translateY(-8px);
+}
+
+.envelope {
+  width:100%;
+  max-width:230px;
+  aspect-ratio:1.08 / 1;
+  position:relative;
+  transform-style:preserve-3d;
+  filter:drop-shadow(0 15px 18px #0009);
+}
+
+.envelope-body {
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border:1px solid #d1ad6b;
+  background:
+    linear-gradient(145deg,#6c2938,#381522 52%,#1d1019);
+  box-shadow:
+    inset 0 0 0 5px #1a0c13,
+    inset 0 0 0 7px #9a6a40,
+    inset 0 0 35px #000;
+}
+
+.envelope-body:before {
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid #d5b57588;
+  pointer-events:none;
+}
+
+.envelope-body:after {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:65%;
+  background:
+    linear-gradient(145deg,transparent 49.5%,#a7784b 50%,#4c1d2c 51%);
+  clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);
+  opacity:.75;
+}
+
+.envelope-flap {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:55%;
+  z-index:3;
+  background:linear-gradient(145deg,#9a6240,#5a2630 55%,#2a111c);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;
+  transition:transform .8s ease;
+  border-top:2px solid #e0c18a;
+  backface-visibility:visible;
+}
+
+.wax-seal {
+  position:absolute;
+  z-index:5;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f4d99d;
+  font-family:'Cinzel',serif;
+  font-size:17px;
+  background:
+    radial-gradient(circle at 35% 30%,#c87970,#762535 55%,#350f1b);
+  border:2px solid #d6b475;
+  box-shadow:0 0 0 4px #2b111b,0 0 20px #000;
+  transition:.5s;
+}
+
+.envelope-number {
+  position:absolute;
+  z-index:6;
+  bottom:14px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-family:'Cinzel',serif;
+  letter-spacing:4px;
+  font-size:10px;
+  color:#e5c88e;
+}
+
+/* Different envelope colour treatments */
+.gift-card:nth-child(3n+2) .envelope-body {
+  background:linear-gradient(145deg,#293b59,#121c31 60%,#0b101c);
+}
+.gift-card:nth-child(3n+2) .envelope-flap {
+  background:linear-gradient(145deg,#6d85a8,#293b59 60%,#101c31);
+}
+.gift-card:nth-child(3n) .envelope-body {
+  background:linear-gradient(145deg,#6c5836,#2d2116 60%,#17100c);
+}
+.gift-card:nth-child(3n) .envelope-flap {
+  background:linear-gradient(145deg,#b28c4f,#604421 60%,#291b12);
+}
+.collection-lust .envelope-body {
+  background:linear-gradient(145deg,#681e30,#2a0d19 60%,#10090e);
+}
+.collection-lust .envelope-flap {
+  background:linear-gradient(145deg,#9c3448,#531526 60%,#210a14);
+}
+.collection-lust .wax-seal {
+  background:radial-gradient(circle at 35% 30%,#e0b76b,#95601d 60%,#40200d);
+  color:#fff0c2;
+}
+
+.gift-card:hover .wax-seal {
+  box-shadow:0 0 0 4px #2b111b,0 0 30px #d8b978aa;
+}
+
+/* COLLECTION PAGE REVEAL */
+
+.gift-card.opening .envelope-flap {
+  transform:rotateX(180deg);
+}
+
+.gift-card.opening .wax-seal {
+  opacity:0;
+  transform:translate(-50%,-50%) scale(1.8);
+}
+
+/* MODAL */
+
+.modal {
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:#05050aee;
+  backdrop-filter:blur(12px);
+  overflow-y:auto;
+}
+
+.modal.show { display:flex; }
+
+.modal-panel {
+  position:relative;
+  width:min(850px,100%);
+  max-height:92vh;
+  overflow-y:auto;
+  border:1px solid #c9a56788;
+  background:
+    radial-gradient(ellipse at top,#30202a,#100e15 65%);
+  padding:clamp(20px,4vw,42px);
+  text-align:center;
+  box-shadow:0 0 70px #000;
+  animation:modalIn .65s ease both;
+}
+
+@keyframes modalIn {
+  from { opacity:0; transform:translateY(35px) scale(.96); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+
+.modal-panel h2 {
+  font-family:'Cinzel',serif;
+  color:var(--gold-light);
+  font-weight:500;
+  letter-spacing:3px;
+  font-size:clamp(20px,4vw,32px);
+}
+
+.modal-image {
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:72vh;
+  object-fit:contain;
+  object-position:center;
+  margin:20px auto;
+  background:#08080c;
+}
+
+.modal-copy {
+  color:#e9d9bd;
+  font-size:21px;
+  line-height:1.5;
+}
+
+.modal-actions {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-top:22px;
+}
+
+.close-btn {
+  position:sticky;
+  top:0;
+  float:right;
+  z-index:10;
+  background:#25121a;
+  border:1px solid #c9a567;
+  color:#f2d69c;
+  width:38px;
+  height:38px;
+  font-size:20px;
+}
+
+/* SPECIAL REVEALS */
+
+.special-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+  margin:25px 0;
+}
+
+.special-tile {
+  border:1px solid #b99455;
+  background:linear-gradient(145deg,#2b2023,#101018);
+  padding:12px;
+  color:#f0d9a6;
+  cursor:pointer;
+  transition:.3s;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.special-tile:hover {
+  transform:translateY(-5px);
+  background:#4a2930;
+}
+
+.special-tile img {
+  width:100%;
+  height:130px;
+  object-fit:contain;
+  margin-bottom:10px;
+  background:#09090d;
+}
+
+.board-view {
+  display:none;
+}
+
+.board-view.active { display:block; }
+
+/* FINAL SURPRISE */
+
+#finale {
+  min-height:100vh;
+  padding:80px 18px;
+  display:none;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at 50% 30%,#293c5a,#080b14 70%);
+}
+
+#finale.active { display:block; }
+
+#finale h2 {
+  font-family:'Cinzel',serif;
+  letter-spacing:5px;
+  font-size:clamp(24px,5vw,42px);
+  color:var(--gold-light);
+}
+
+.beach-frame {
+  max-width:1050px;
+  margin:35px auto;
+  padding:8px;
+  border:1px solid #d9bb7c;
+  background:#090b13;
+  box-shadow:0 0 60px #a8b9e033;
+}
+
+.beach-frame img {
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:85vh;
+  object-fit:contain;
+  object-position:center;
+  margin:auto;
+}
+
+.final-intro {
+  max-width:700px;
+  margin:30px auto;
+  color:#e4d6bf;
+  font-size:23px;
+  line-height:1.5;
+}
+
+.letter-envelope {
+  width:min(360px,90vw);
+  height:225px;
+  margin:35px auto;
+  position:relative;
+  cursor:pointer;
+  perspective:1000px;
+  filter:drop-shadow(0 15px 25px #000);
+}
+
+.letter-base {
+  position:absolute;
+  inset:0;
+  background:linear-gradient(145deg,#ead7b2,#b99b70);
+  border:3px solid #d9bd83;
+}
+
+.letter-base:after {
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid #886a42;
+}
+
+.letter-flap {
+  position:absolute;
+  inset:0 0 auto;
+  height:60%;
+  z-index:3;
+  background:linear-gradient(145deg,#e6d0a7,#9e8055);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:transform 1s;
+}
+
+.letter-seal {
+  position:absolute;
+  z-index:5;
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  width:57px;
+  height:57px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#d77c7c,#7c1e32 65%,#390b19);
+  border:2px solid #d9bb7c;
+  display:grid;
+  place-items:center;
+  color:#f5d9a2;
+  font-size:24px;
+}
+
+.letter-envelope.open .letter-flap {
+  transform:rotateX(180deg);
+}
+
+.letter-envelope.open .letter-seal {
+  opacity:0;
+}
+
+#letter-content {
+  display:none;
+  max-width:800px;
+  margin:50px auto;
+  padding:clamp(25px,5vw,55px);
+  color:#3d2a25;
+  background:
+    linear-gradient(#f4e8d1,#e9d8b9);
+  border:8px double #a98958;
+  box-shadow:0 20px 60px #0009;
+  text-align:left;
+  animation:modalIn 1s ease both;
+}
+
+#letter-content.show { display:block; }
+
+.letter-heading {
+  text-align:center;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(34px,7vw,54px);
+  color:#76263b;
+  margin-bottom:25px;
+}
+
+.letter-text {
+  font-size:clamp(19px,3vw,24px);
+  line-height:1.9;
+  white-space:pre-line;
+  font-family:'Cormorant Garamond',serif;
+}
+
+.letter-sign {
+  text-align:right;
+  font-family:'Great Vibes',cursive;
+  font-size:40px;
+  color:#76263b;
+  margin-top:35px;
+}
+
+/* FOOTER / NAV */
+
+.page-footer {
+  text-align:center;
+  padding:35px 15px;
+  color:#a99472;
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+.final-link {
+  margin:65px auto 20px;
+  text-align:center;
+  max-width:700px;
+  padding:25px;
+  border-top:1px solid #d8b97855;
+}
+
+.final-link p {
+  color:#c8b99f;
+  font-size:20px;
+}
+
+@media(max-width:850px) {
+  .gift-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
+@media(max-width:520px) {
+  .door-stage { height:300px; --door-gap:10px; }
+  .door-unit { padding:5px; }
+  .door-unit:before { inset:8px; }
+  .door-unit:after { inset:13px; }
+  .door-panel { inset:8px; gap:9px; }
+  .door-panel:before { inset:10px; }
+  .door-panel:after { inset:20px; }
+  .door-handle { width:10px; height:10px; }
+  .left .door-handle { right:8px; }
+  .right .door-handle { left:8px; }
+  .gift-grid { gap:8px; }
+  .gift-card { min-height:190px; padding:5px; }
+  .envelope { max-width:175px; }
+  .wax-seal { width:43px; height:43px; }
+  .special-grid { grid-template-columns:1fr; }
+  .special-tile img { height:180px; }
+  .collection { padding:25px 10px 60px; }
+}
+</style>
+</head>
+
+<body>
+<div id="stars"></div>
+
+<!-- GRAND ENTRANCE -->
+<section id="intro">
+  <div class="eyebrow">A private birthday experience</div>
+  <h1>ATHISH</h1>
+  <div class="intro-subtitle">LEVEL 24 · THE UNIVERSE</div>
+
+  <div class="gold-line"></div>
+
+  <p style="font-size:23px;color:#e5d6bc;margin:0">
+    One entry. Twelve experiences. Infinite memories.
+  </p>
+
+  <div class="door-stage">
+    <!-- TWO SEPARATE PALACE ENTRANCES -->
+    <div class="door-unit love-unit">
+      <div class="door left" id="loveDoor">
+        <div class="door-panel">
+          <div class="door-symbol">✧</div>
+          <div class="door-label">LOVE</div>
+          <div class="eyebrow">A world of us</div>
+        </div>
+        <div class="door-handle"></div>
+      </div>
+    </div>
+
+    <div class="door-unit lust-unit">
+      <div class="door right" id="lustDoor">
+        <div class="door-panel">
+          <div class="door-symbol">♛</div>
+          <div class="door-label">LUST</div>
+          <div class="eyebrow">A world of desire</div>
+        </div>
+        <div class="door-handle"></div>
+      </div>
+    </div>
+
+    <div class="door-choice">
+      <button aria-label="Enter Love" onclick="enterWorld('love')"></button>
+      <button aria-label="Enter Lust" onclick="enterWorld('lust')"></button>
+    </div>
+  </div>
+
+  <div class="door-hint">CHOOSE A DOOR TO ENTER</div>
+
+  <div class="final-link">
+    <p>And somewhere in this universe, there is one last surprise.</p>
+    <button class="primary-btn" onclick="showFinale()">
+      DISCOVER THE LAST SURPRISE
+    </button>
+  </div>
+</section>
+
+<!-- LOVE COLLECTION -->
+<section class="collection collection-love" id="loveWorld">
+  <button class="back-btn" onclick="goHome()">← BACK TO THE ENTRANCE</button>
+
+  <header class="collection-header">
+    <div class="eyebrow">The softer side of our universe</div>
+    <h2>THE LOVE COLLECTION</h2>
+    <div class="gold-line"></div>
+    <p>Every little envelope holds a piece of us.</p>
+  </header>
+
+  <div class="gift-grid" id="loveGrid"></div>
+
+  <div class="page-footer">MADE WITH LOVE · ONLY FOR YOU</div>
+</section>
+
+<!-- LUST COLLECTION -->
+<section class="collection collection-lust" id="lustWorld">
+  <button class="back-btn" onclick="goHome()">← BACK TO THE ENTRANCE</button>
+
+  <header class="collection-header">
+    <div class="eyebrow">A little mystery after dark</div>
+    <h2>THE LUST COLLECTION</h2>
+    <div class="gold-line"></div>
+    <p>Some secrets are meant to be opened slowly.</p>
+  </header>
+
+  <div class="gift-grid" id="lustGrid"></div>
+
+  <div class="page-footer">PRIVATE ACCESS · JUST US</div>
+</section>
+
+<!-- FINAL SURPRISE -->
+<section id="finale">
+  <button class="back-btn" onclick="goHome()">← BACK TO OUR UNIVERSE</button>
+
+  <div class="eyebrow" style="margin-top:50px">A little something beyond all the gifts</div>
+  <h2>ONE LAST SURPRISE</h2>
+  <div class="gold-line"></div>
+
+  <div class="beach-frame">
+    <img
+      src="assets/special/moonlit-beach-proposal.jpg"
+      alt="Our moonlit beach surprise"
+      loading="eager"
+    >
+  </div>
+
+  <p class="final-intro">
+    Some moments cannot be wrapped in a gift.
+    Some feelings cannot fit inside a thousand pages.
+    But I still wanted to leave you something to keep.
+  </p>
+
+  <div class="eyebrow">A letter, from me to you</div>
+
+  <div class="letter-envelope" id="finalLetter" onclick="openLetter()">
+    <div class="letter-base"></div>
+    <div class="letter-flap"></div>
+    <div class="letter-seal">♥</div>
+  </div>
+
+  <p class="door-hint" id="letterHint">TAP THE SEALED LETTER TO OPEN</p>
+
+  <article id="letter-content">
+    <div class="letter-heading">Deii mama...</div>
+
+    <div class="letter-text" id="letterText">Deii mama, ethana varusham aanalum seri, namma memories ellame avalo beautiful aanadhu, endha oru relationship um nammaloda relationship pola varadhu. Coz deep down we know ours is relationship of sacrifice.....namma parents kaaga evalavo sacrifice panni dha indha edathula nikkirom....niyum naanum sera mudiyalena enna .....epome seri ni en krishna and naa un radhai dhan....radhai ah paathu dha rukmini poramai pataanga coz krishna radha oda love elaathayum vida avalo perusu....naa perusa hinduism la nambikkai illadhava dha aana ennaikume krishna radha matum personal favourite.....coz avangala pola life amayadhavangaluku avangaloda love oda depth puriyadhu so namma love ah sonaalum yaarukum puryadhu....aana ennaikume seri idha ni innum 40yrs apro paakurapo kooda un mogathula siripu dha irukanum....Love u more than 3 times.....</div>
+
+    <div class="letter-sign">Forever yours ♡</div>
+  </article>
+
+  <div class="page-footer">
+    NO MATTER HOW MANY YEARS PASS · YOU WILL ALWAYS BE MY KRISHNA
+  </div>
+</section>
+
+<!-- UNIVERSAL GIFT MODAL -->
+<div class="modal" id="giftModal" onclick="outsideClose(event)">
+  <div class="modal-panel">
+    <button class="close-btn" onclick="closeModal()">×</button>
+    <div class="eyebrow" id="modalEyebrow">A GIFT FOR YOU</div>
+    <h2 id="modalTitle"></h2>
+    <div class="gold-line"></div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   GIFT DATA
+   Image names should match the files inside assets folders.
+========================================================== */
+
+const gifts = {
+  love: [
+    {
+      title:"A Thousand Feelings, 24 Reasons",
+      image:"assets/invitations/01-thousand-feelings.jpg",
+      url:"https://fahmithanasrin13.github.io/a-thousand-feelings-24-reasons/",
+      description:"Twenty-four little reasons. A thousand feelings."
+    },
+    {
+      title:"A Universe of Us",
+      image:"assets/invitations/02-universe-of-us.jpg",
+      url:"https://fahmithanasrin13.github.io/a-universe-of-us/",
+      description:"A little universe, made for the two of us."
+    },
+    {
+      title:"The Stars Knew First",
+      image:"assets/invitations/03-stars-knew-first.jpg",
+      url:"https://heyzine.com/flip-book/c668ce20c0.html",
+      description:"Maybe the stars knew our story before we did."
+    },
+    {
+      title:"CASE 024 — The Unknown Admirer",
+      image:"assets/invitations/04-case-024.jpg",
+      url:"https://fahmithanasrin13.github.io/case-024/",
+      description:"A mystery waiting to be uncovered."
+    },
+    {
+      title:"How Well Do You Know Fami?",
+      image:"assets/invitations/05-fami-quiz.jpg",
+      url:"https://fahmithanasrin13.github.io/fami-quiz/",
+      description:"Let's see how much you really know."
+    },
+    {
+      title:"The Love Puzzle",
+      image:"assets/invitations/06-love-puzzle.jpg",
+      url:"https://puzzlesnap.com/share/209cec60b7298bc",
+      description:"Every piece belongs somewhere."
+    },
+    {
+      title:"The Boyfriend Award",
+      image:"assets/invitations/07-boyfriend-award-invite.jpg",
+      special:"award",
+      description:"An extraordinary man deserves an extraordinary award."
+    },
+    {
+      title:"The Life Achievement Board",
+      image:"assets/invitations/08-life-board-invite.jpg",
+      special:"boards",
+      description:"Three visions. One extraordinary life."
+    }
+  ],
+
+  lust: [
+    {
+      title:"AFTER DARK — À LA CARTE",
+      image:"assets/invitations/09-after-dark.jpg",
+      url:"https://fahmithanasrin13.github.io/AFTER_DARK/",
+      description:"A private menu, made for us."
+    },
+    {
+      title:"7 Nights of Temptation",
+      image:"assets/invitations/10-seven-nights.jpg",
+      url:"https://fahmithanasrin13.github.io/7-nights-of-temptation/",
+      description:"Seven nights. Seven little adventures."
+    },
+    {
+      title:"The Desire Deck",
+      image:"assets/invitations/11-desire-deck.jpg",
+      url:"https://fahmithanasrin13.github.io/the-desire-deck/",
+      description:"A deck full of surprises."
+    },
+    {
+      title:"Read This When You Crave Me",
+      image:"assets/invitations/12-crave-me.jpg",
+      url:"https://read-this-when-you-crave-me.fahmithanasrin13.workers.dev/",
+      description:"A secret, waiting for the right moment."
+    }
+  ]
+};
+
+/* ==========================================================
+   BUILD SEALED ENVELOPES
+   Closed envelopes show ONLY their number.
+========================================================== */
+
+function createEnvelope(gift, index, world) {
+  const card = document.createElement("button");
+  card.className = "gift-card";
+  card.type = "button";
+  card.setAttribute("aria-label", "Open sealed gift " + (index + 1));
+
+  card.innerHTML = `
+    <div class="envelope">
+      <div class="envelope-body"></div>
+      <div class="envelope-flap"></div>
+      <div class="wax-seal">✦</div>
+      <div class="envelope-number">SEALED · ${String(index + 1).padStart(2,"0")}</div>
+    </div>
+  `;
+
+  card.addEventListener("click", () => {
+    card.classList.add("opening");
+
+    setTimeout(() => {
+      openGift(gift);
+      card.classList.remove("opening");
+    }, 850);
+  });
+
+  return card;
+}
+
+function buildCollections() {
+  const loveGrid = document.getElementById("loveGrid");
+  const lustGrid = document.getElementById("lustGrid");
+
+  gifts.love.forEach((gift,index) => {
+    loveGrid.appendChild(createEnvelope(gift,index,"love"));
+  });
+
+  gifts.lust.forEach((gift,index) => {
+    lustGrid.appendChild(createEnvelope(gift,index,"lust"));
+  });
+}
+
+/* ==========================================================
+   GRAND DOOR OPENING
+========================================================== */
+
+let currentWorld = null;
+
+function enterWorld(world) {
+  currentWorld = world;
+
+  const left = document.getElementById("loveDoor");
+  const right = document.getElementById("lustDoor");
+
+  left.classList.remove("open-left");
+  right.classList.remove("open-right");
+
+  if (world === "love") {
+    left.classList.add("open-left");
+  } else {
+    right.classList.add("open-right");
+  }
+
+  setTimeout(() => {
+    document.getElementById("intro").classList.add("hidden");
+
+    document.getElementById("loveWorld").classList.remove("active");
+    document.getElementById("lustWorld").classList.remove("active");
+
+    document.getElementById(
+      world === "love" ? "loveWorld" : "lustWorld"
+    ).classList.add("active");
+
+    window.scrollTo({top:0,behavior:"instant"});
+  },1100);
+}
+
+function goHome() {
+  document.getElementById("loveWorld").classList.remove("active");
+  document.getElementById("lustWorld").classList.remove("active");
+  document.getElementById("finale").classList.remove("active");
+
+  document.getElementById("intro").classList.remove("hidden");
+
+  document.getElementById("loveDoor").classList.remove("open-left");
+  document.getElementById("lustDoor").classList.remove("open-right");
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ==========================================================
+   GIFT REVEALS
+========================================================== */
+
+function openGift(gift) {
+  document.getElementById("modalEyebrow").textContent = "A SEALED GIFT, JUST FOR YOU";
+  document.getElementById("modalTitle").textContent = gift.title;
+
+  const content = document.getElementById("modalContent");
+
+  content.innerHTML = `
+    <img class="modal-image" src="${gift.image}" alt="${gift.title}">
+    <p class="modal-copy">${gift.description}</p>
+  `;
+
+  if (gift.special === "award") {
+    content.innerHTML += `
+      <div class="modal-actions">
+        <button class="primary-btn" onclick="revealAward()">
+          OPEN YOUR AWARD
+        </button>
+      </div>
+    `;
+  } else if (gift.special === "boards") {
+    content.innerHTML += `
+      <div class="modal-actions">
+        <button class="primary-btn" onclick="revealBoards()">
+          UNLOCK YOUR ACHIEVEMENTS
+        </button>
+      </div>
+    `;
+  } else {
+    content.innerHTML += `
+      <div class="modal-actions">
+        <button class="primary-btn" onclick="visitGift('${gift.url}')">
+          ENTER THIS GIFT →
+        </button>
+      </div>
+    `;
+  }
+
+  document.getElementById("giftModal").classList.add("show");
+}
+
+function visitGift(url) {
+  window.open(url,"_blank","noopener,noreferrer");
+}
+
+function closeModal() {
+  document.getElementById("giftModal").classList.remove("show");
+}
+
+function outsideClose(event) {
+  if (event.target.id === "giftModal") closeModal();
+}
+
+/* ==========================================================
+   BOYFRIEND AWARD
+========================================================== */
+
+function revealAward() {
+  const content = document.getElementById("modalContent");
+
+  content.innerHTML = `
+    <div style="font-size:55px;color:#e5c47f;margin:15px">🏆</div>
+    <div class="eyebrow">A SPECIAL RECOGNITION</div>
+    <h2 style="font-size:clamp(24px,5vw,38px)">THE BOYFRIEND AWARDS</h2>
+    <p class="modal-copy">
+      For the man who made ordinary moments feel extraordinary.
+    </p>
+    <div class="gold-line"></div>
+    <img
+      class="modal-image"
+      src="assets/special/boyfriend-award-certificate.jpg"
+      alt="Boyfriend Award Certificate"
+    >
+    <div class="modal-actions">
+      <button class="primary-btn" onclick="downloadImage('assets/special/boyfriend-award-certificate.jpg','Athish-Boyfriend-Award.jpg')">
+        DOWNLOAD YOUR AWARD
+      </button>
+    </div>
+  `;
+
+  confetti();
+}
+
+/* ==========================================================
+   LIFE ACHIEVEMENT BOARDS
+========================================================== */
+
+function revealBoards() {
+  const content = document.getElementById("modalContent");
+
+  const boards = [
+    {
+      title:"OUR LIFE TOGETHER",
+      image:"assets/special/board-our-life-together.jpg"
+    },
+    {
+      title:"YOU, THROUGH MY MEMORIES",
+      image:"assets/special/board-through-my-memories.jpg"
+    },
+    {
+      title:"THE MAN YOU'LL BECOME",
+      image:"assets/special/board-your-own-journey.jpg"
+    }
+  ];
+
+  content.innerHTML = `
+    <p class="modal-copy">
+      Three visions. Three different journeys.
+      Every one of them worth celebrating.
+    </p>
+    <div class="special-grid">
+      ${boards.map((board,index) => `
+        <button class="special-tile" onclick="showBoard(${index})">
+          <img src="${board.image}" alt="${board.title}">
+          ${board.title}
+        </button>
+      `).join("")}
+    </div>
+    <div id="selectedBoard"></div>
+  `;
+}
+
+function showBoard(index) {
+  const boards = [
+    {
+      title:"OUR LIFE TOGETHER",
+      image:"assets/special/board-our-life-together.jpg"
+    },
+    {
+      title:"YOU, THROUGH MY MEMORIES",
+      image:"assets/special/board-through-my-memories.jpg"
+    },
+    {
+      title:"THE MAN YOU'LL BECOME",
+      image:"assets/special/board-your-own-journey.jpg"
+    }
+  ];
+
+  const board = boards[index];
+
+  document.getElementById("selectedBoard").innerHTML = `
+    <div class="gold-line"></div>
+    <h2>${board.title}</h2>
+    <img class="modal-image" src="${board.image}" alt="${board.title}">
+    <button class="primary-btn"
+      onclick="downloadImage('${board.image}','Achievement-Board-${index+1}.jpg')">
+      DOWNLOAD THIS BOARD
+    </button>
+  `;
+
+  document.getElementById("selectedBoard").scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+}
+
+/* ==========================================================
+   FINAL BEACH + LETTER
+========================================================== */
+
+function showFinale() {
+  document.getElementById("intro").classList.add("hidden");
+  document.getElementById("loveWorld").classList.remove("active");
+  document.getElementById("lustWorld").classList.remove("active");
+  document.getElementById("finale").classList.add("active");
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openLetter() {
+  const envelope = document.getElementById("finalLetter");
+  const letter = document.getElementById("letter-content");
+  const hint = document.getElementById("letterHint");
+
+  envelope.classList.add("open");
+  hint.textContent = "YOUR LETTER IS OPENING...";
+
+  setTimeout(() => {
+    letter.classList.add("show");
+    hint.textContent = "A LETTER FROM MY HEART";
+    letter.scrollIntoView({behavior:"smooth",block:"start"});
+  },1000);
+}
+
+/* ==========================================================
+   DOWNLOAD IMAGE
+========================================================== */
+
+function downloadImage(path,filename) {
+  const link = document.createElement("a");
+  link.href = path;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+
+/* ==========================================================
+   GOLDEN CONFETTI
+========================================================== */
+
+function confetti() {
+  const colors = ["#d8b978","#f4dfaa","#fff2d0","#a96b37","#8f2942"];
+
+  for(let i=0;i<90;i++) {
+    const piece = document.createElement("div");
+
+    piece.style.position = "fixed";
+    piece.style.zIndex = "100";
+    piece.style.left = Math.random()*100+"vw";
+    piece.style.top = "-15px";
+    piece.style.width = (4+Math.random()*6)+"px";
+    piece.style.height = (7+Math.random()*10)+"px";
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.pointerEvents = "none";
+    piece.style.borderRadius = "2px";
+
+    document.body.appendChild(piece);
+
+    const duration = 1800+Math.random()*2200;
+    const drift = (Math.random()-.5)*300;
+
+    piece.animate([
+      {transform:"translate(0,0) rotate(0deg)",opacity:1},
+      {transform:`translate(${drift}px,105vh) rotate(${Math.random()*900}deg)`,opacity:.1}
+    ],{
+      duration,
+      easing:"cubic-bezier(.2,.7,.4,1)"
+    });
+
+    setTimeout(()=>piece.remove(),duration+100);
+  }
+}
+
+/* INITIALISE */
+
+buildCollections();
+</script>
+
+</body>
+</html>
